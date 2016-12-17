@@ -1,0 +1,35 @@
+{
+  "name": "clientkit-markdown",
+  "version": "0.5.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "tap --cov test/*.test.js"
+  },
+  "keywords": [
+    "json",
+    "template",
+    "object"
+  ],
+  "author": "Greg Allen <code@firstandthird.com> (http://firstandthird.com/)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/firstandthird/clientkit-markdown.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "clientkit-task": "0.0.6",
+    "highlight": "^0.2.4",
+    "markdown-it": "^8.2.2",
+    "markdown-it-include": "0.0.2",
+    "markdown-it-toc-and-anchor": "^4.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.9.1",
+    "eslint-config-firstandthird": "^3.0.2",
+    "eslint-plugin-import": "^2.1.0",
+    "tap": "^8.0.1",
+    "tape": "^4.6.3"
+  }
+}
