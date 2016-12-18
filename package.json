@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "tap --cov test/*.test.js"
+    "test": "tap test/test.markdown.js"
   },
   "keywords": [
     "json",
@@ -20,7 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "clientkit-task": "0.0.6",
-    "highlight": "^0.2.4",
+    "highlightjs": "^9.8.0",
     "markdown-it": "^8.2.2",
     "markdown-it-include": "0.0.2",
     "markdown-it-toc-and-anchor": "^4.1.1"
