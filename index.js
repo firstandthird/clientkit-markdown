@@ -1,6 +1,21 @@
 'use strict';
 const ClientKitTask = require('clientkit-task');
-const Markdown = require('markdown-it');
+const toc = require('markdown-it-toc-and-anchor');
+const include = require('markdown-it-include');
+const Markdown = require('markdown-it')({
+  html: true,
+  linkify: true,
+  typographer: true,
+  highlight: (str, lang) => {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return `<pre class="hljs"><code>${hljs.highlight(lang, str, true).value} </code></pre>`;
+      } catch (__) {}
+    }
+    return '';
+  }
+}).use(include, {})
+// .use(toc, {});
 const hljs = require('highlightjs');
 const async = require('async');
 const fs = require('fs');
@@ -10,19 +25,7 @@ class MarkdownTask extends ClientKitTask {
 
   constructor(server, options, runner) {
     super(server, options, runner);
-    this.markdown = new Markdown({
-      html: true,
-      linkify: true,
-      typographer: true,
-      highlight: (str, lang) => {
-        if (lang && hljs.getLanguage(lang)) {
-          try {
-            return `<pre class="hljs"><code>${hljs.highlight(lang, str, true).value} </code></pre>`;
-          } catch (__) {}
-        }
-        return '';
-      }
-    });
+    this.markdown = Markdown;
   }
 
   compile(input, output, allDone) {
@@ -65,14 +68,7 @@ class MarkdownTask extends ClientKitTask {
   }
 
   process(input, output, done) {
-    // if it's a suitable compile specifier:
-    if (typeof input === 'object' && input.type && input.input) {
-      if (input.type === 'precompile') {
-        return this.precompile(input.input, output, done);
-      }
-      return this.compile(input, output, done);
-    }
-    // otherwise assume it's a filepath or list of filepaths:
+    // a filepath or list of file paths:
     return this.precompile(input, output, done);
   }
 }
