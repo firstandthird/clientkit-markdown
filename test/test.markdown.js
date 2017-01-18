@@ -1,14 +1,14 @@
 'use strict';
 const test = require('tape');
 const MarkdownTask = require('../');
-const ClientKitTask = require('clientkit-task');
+const RunKitTask = require('runkit-task');
 const fs = require('fs');
 const os = require('os');
 
 test('instance of', (t) => {
   t.plan(1);
   const nt = new MarkdownTask();
-  t.equal(nt instanceof ClientKitTask, true, 'instance of ClientKitTask');
+  t.equal(nt instanceof RunKitTask, true, 'instance of RunKitTask');
 });
 
 test('converts and saves', (t) => {
@@ -20,11 +20,11 @@ test('converts and saves', (t) => {
   const task = new MarkdownTask('markdown', {
     dist: os.tmpdir(),
     files
-  });
+  }, {});
   task.execute((err) => {
     t.equal(err, null, 'not erroring');
     t.equal(fs.existsSync(outpath), true, 'file exists');
-    t.equal(fs.readFileSync(outpath, 'utf8'), fs.readFileSync('test/expected/out.html', 'utf8'));
+    t.equal(fs.readFileSync(outpath, 'utf8'), fs.readFileSync('test/expected/out.html', 'utf8'), 'generates expected html');
   });
 });
 
@@ -37,10 +37,10 @@ test('converts array of files and saves', (t) => {
   const task = new MarkdownTask('markdown', {
     dist: os.tmpdir(),
     files
-  });
+  }, {});
   task.execute((err) => {
     t.equal(err, null, 'not erroring');
     t.equal(fs.existsSync(outpath), true, 'file exists');
-    t.equal(fs.readFileSync(outpath, 'utf8'), fs.readFileSync('test/expected/out2.html', 'utf8'));
+    t.equal(fs.readFileSync(outpath, 'utf8'), fs.readFileSync('test/expected/out2.html', 'utf8'), 'generates expected html 2');
   });
 });

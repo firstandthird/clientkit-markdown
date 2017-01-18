@@ -1,11 +1,14 @@
 'use strict';
-const ClientKitTask = require('clientkit-task');
-const toc = require('markdown-it-toc-and-anchor');
+const RunKitTask = require('runkit-task');
 const include = require('markdown-it-include');
+const hljs = require('highlightjs');
+const async = require('async');
+const fs = require('fs');
+const os = require('os');
 const Markdown = require('markdown-it')({
   html: true,
   linkify: true,
-  typographer: true,
+  typography: true,
   highlight: (str, lang) => {
     if (lang && hljs.getLanguage(lang)) {
       try {
@@ -14,14 +17,10 @@ const Markdown = require('markdown-it')({
     }
     return '';
   }
-}).use(include, {})
-// .use(toc, {});
-const hljs = require('highlightjs');
-const async = require('async');
-const fs = require('fs');
-const os = require('os');
+})
+.use(include, {});
 
-class MarkdownTask extends ClientKitTask {
+class MarkdownTask extends RunKitTask {
 
   constructor(server, options, runner) {
     super(server, options, runner);

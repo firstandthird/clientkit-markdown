@@ -19,11 +19,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "clientkit-task": "0.0.6",
     "highlightjs": "^9.8.0",
-    "markdown-it": "^8.2.2",
+    "markdown-it": "^7.0.0",
     "markdown-it-include": "0.0.2",
-    "markdown-it-toc-and-anchor": "^4.1.1"
+    "markdown-it-toc-and-anchor": "^4.1.1",
+    "runkit-task": "0.0.10"
   },
   "devDependencies": {
     "eslint": "^3.9.1",
