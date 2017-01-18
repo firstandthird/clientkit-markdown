@@ -12,10 +12,10 @@ const Markdown = require('markdown-it')({
   highlight: (str, lang) => {
     if (lang && hljs.getLanguage(lang)) {
       try {
-        return `<pre class="hljs"><code>${hljs.highlight(lang, str, true).value} </code></pre>`;
+        return hljs.highlight(lang, str).value;
       } catch (__) {}
     }
-    return '';
+    return ''; // use external default escaping
   }
 })
 .use(include, {});
